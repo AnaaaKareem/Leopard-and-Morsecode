@@ -1,0 +1,93 @@
+    <html lang="en">
+    <head>
+    <title>Morse Code</title>
+    <script>
+
+    function encdec(){
+        let answer;
+        let str_input = document.getElementById("input").value;
+        let operation = document.getElementById("operation").value;
+        
+        const mcode = {
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+        'Y': '-.--', 'Z': '--..', ' ': ' ', '0': '-----',
+        '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
+        '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+        '&': '.-...', "'": '.----.', '@': '.--.-.', ')': '-.--.-', '(': '-.--.',
+        ':': '---...', ',': '--..--', '=': '-...-', '!': '-.-.--', '.': '.-.-.-',
+        '-': '-....-', '+': '.-.-.', '"': '.-..-.', '?': '..--..', '/': '-..-.'
+        }
+
+        // Converting string to morse code
+        if (operation === "enc") {
+            /* Convert text to uppercase and split the letters
+            * map and split them in to x*/
+            answer = str_input.toUpperCase().split('').map(x => {
+                // If the letter is available return morse code
+                if (mcode[x]) {
+                    return mcode[x];
+                }
+                // If false prompt the user and invalid input
+                // return empty
+                else if (!mcode[x]) {
+                    alert("Invalid input");
+                    return null;
+                }
+            }).join(' ');
+        }
+
+        // Converting morse code to string
+        if (operation === "dec") {
+            // replaceAll is used to remove double whitespaces only to one
+            str_input = str_input.replaceAll('  ' ,' ')
+            // Split the spaces between each morse code and map them
+            answer = str_input.split(/\s/).map(function (str_input) {
+                if (str_input === "") {
+                    return " ";
+                }
+                /* Get the morse code (.) and (-) and check of they are
+                * in the mcode table*/
+                for (let key in mcode) {
+                    if (mcode[key] === str_input) {
+                            return key;
+                    }
+                }
+                return str_input;
+            }).join('');
+        }
+
+            document.getElementById("output").innerHTML = answer;
+    }
+
+    </script>
+    </head>
+    <body>
+    <H1>Morse code encoder/decoder</H1>
+    <h3>@author: Karim Amr Elsayed Ahmed Abdou Khater </h3>
+    <div>
+    <form>
+    <p> Enter a string</p>
+    <p> <textarea id="input" rows='5' cols='50'></textarea> </p>
+    <p>
+    <div id="optionloc" style="position:absolute; top:190px; left:240px;">
+    <select id="operation">
+    <option value="enc">Encode</option>
+    <option value="dec">Decode</option>
+    </select>
+    </div>
+    <div id="buttonloc" style="position:absolute; top:190px; left:320px;">
+    <button type="button" id="submit" onclick=encdec()>Submit</button>
+    </div>
+    </p>
+
+    <div>
+    <p>Encoded/decoded Morse code: </p>
+    <textarea id="output" rows='5' cols='50' readonly></textarea>
+    </div>
+    </form>
+    </div>
+    </body>
+    </html>
