@@ -90,7 +90,7 @@ print(count)
 
 ## Author and license
 
-This script was made by Karim Amr Elsayed Khater. It is not licensed and is free to use and modify.
+This script is not licensed and is free to use and modify.
 
 ## Future work
 
